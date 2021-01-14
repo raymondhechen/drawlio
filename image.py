@@ -1,7 +1,6 @@
 import io
 import math
 import numpy as np
-# from PIL import Image
 import cv2
 
 
@@ -36,9 +35,6 @@ def reshape_bytelist(bytelist):
     pixel_list = []
     for i in range(0, len(bytelist), 3):
         pixel_list.append(bytelist[i:i+3])
-
-    # print(pixel_list)
-
     template = np.full((dimension, dimension, 3), [0, 0, 0])
 
     row = 0
@@ -54,25 +50,11 @@ def reshape_bytelist(bytelist):
 
         col += 1
 
-    # # find number of pixels to fill in
-    # missing_pixel_count = int(math.pow(dimension, 2) - num_pixels)
-    # for _ in range(0, missing_pixel_count):
-    #     bytelist = np.concatenate((bytelist, [0, 0, 0]))  # append empty bytes
-
-    # square_bytelist = np.reshape(bytelist, (dimension, dimension, 3))
-
-    # print(template.shape)
     return template
 
 
 def write_png(bytelist):
-    # img = Image.fromarray(bytelist, 'RGB')
-    # img.save('test.png')
     cv2.imwrite('test.png', bytelist)
-
-
-# print(read_file_bytes('test.txt'))
-# print(reshape_bytelist(linear_bytes))
 
 bytelist = read_file_bytes('video-1610615255.mp4')
 bytelist = reshape_bytelist(bytelist)
